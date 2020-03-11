@@ -1,4 +1,4 @@
-package cn;
+package cn.Thread常用方法;
 /**
  * 今天也要元气满满啊！
  * 今天也要加油啊！
