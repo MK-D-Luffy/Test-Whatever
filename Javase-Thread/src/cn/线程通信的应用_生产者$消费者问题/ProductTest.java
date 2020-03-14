@@ -22,13 +22,26 @@ package cn.线程通信的应用_生产者$消费者问题;
  * @author 今天也要努力的小白
  * @date 2020/3/11 22:12
  */
+//生产者
 class Producer implements Runnable {
     private Amount amount;
 
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName() + "开始生产产品...");
-        amount.setAmount();
+        /**（!!!）
+         *while(true)的作用：使得生产和消费可以不断的进行下去，对两个线程来说，其中一个线程a被wait（）阻塞后，
+         * 无法继续执行下面的代码,当在被另一个线程b唤醒后，如果没用while（true）循环，a线程会继续运行后面的代码。
+         * 然后直接直接离开该线程（a线程），生产者和消费者只能有一次的交互（通信），不能达到一直交互的要求。
+         */
+        while (true) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            amount.proAmount();
+        }
     }
 
     public Producer(Amount amount) {
@@ -36,13 +49,21 @@ class Producer implements Runnable {
     }
 }
 
+//消费者
 class Consumer implements Runnable {
     private Amount amount;
 
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName() + "开始消费产品...");
-        amount.setAmount1();
+        while (true) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            amount.conAmount();
+        }
     }
 
     public Consumer(Amount amount) {
@@ -51,20 +72,23 @@ class Consumer implements Runnable {
     }
 }
 
+//产品数量
 class Amount {
     private static int amount = 0;
 
-    public synchronized void setAmount() {
-        while (true) {
+    public void proAmount() {
+
 //        生成产品
+        synchronized (this) {
             if (amount < 20) {
                 amount++;
                 System.out.println(Thread.currentThread().getName() + "开始生产第" + amount + "个");
 
+                //一旦生产了，就唤醒消费者来消费。
                 notify();
             } else {
                 try {
-                    //等待
+                    //等待，如果生产太多超过20，就会先wait，等消费者消费到小于20个，在继续生产。
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -73,18 +97,19 @@ class Amount {
         }
     }
 
+    public void conAmount() {
 
-    public synchronized void setAmount1() {
-        while (true){
 //        消费产品
+        synchronized (this) {
             if (amount > 0) {
                 System.out.println(Thread.currentThread().getName() + "开始消费第" + amount + "个");
                 amount--;
 
+                //一旦消费了，就唤醒生产者去生产
                 notify();
             } else {
                 try {
-                    //等待
+                    //等待，如果消费的过快，导致数量等于0了，进入等待，等待生产者生产了以后在唤醒。
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -99,7 +124,6 @@ class Amount {
 }
 
 public class ProductTest {
-
     public static void main(String[] args) {
         Amount amount = new Amount();
         Producer producer = new Producer(amount);
@@ -109,6 +133,5 @@ public class ProductTest {
         Thread conthread = new Thread(consumer, "消费者");
         prothread.start();
         conthread.start();
-
     }
 }
