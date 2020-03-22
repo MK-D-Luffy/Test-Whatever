@@ -1,5 +1,4 @@
-package cn;
-/**
+ /**
  * 今天也要元气满满啊！
  * 今天也要加油啊！
  * 道路,很远!脚步,更长!
@@ -10,10 +9,14 @@ import org.junit.jupiter.api.Test;
 import java.util.Date;
 
 /**
+ * jdk 8之前的日期时间的API测试
+ * 1. System类中currentTimeMillis();
+ * 2. java.util.Date和子类java.sql.Date
+ *
  * @author 今天也要努力的小白
  * @creat 2020/3/14 17:05
  */
-public class DateTimeTest {
+public class DateTest {
     /*
     java.util.Date类
            |---java.sql.Date类
@@ -64,4 +67,9 @@ public class DateTimeTest {
         //称为时间戳
         System.out.println(time);
     }
+
+    public static void main(String[] args) {
+        System.out.println("123");
+    }
+
 }

@@ -10,6 +10,5 @@
 public class ProjectMain {
     public static void main(String[] args) {
         Welcome.welcome();
-
     }
 }
