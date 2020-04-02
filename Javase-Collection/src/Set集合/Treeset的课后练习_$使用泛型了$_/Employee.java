@@ -1,4 +1,4 @@
-package Set集合.Treeset的课后练习;
+package Set集合.Treeset的课后练习_$使用泛型了$_;
 /**
  * 今天也要元气满满啊！
  * 今天也要加油啊！
@@ -9,13 +9,10 @@ package Set集合.Treeset的课后练习;
  *@author 今天也要努力的小白
  *@creat 2020/3/21 9:21
  */
-public class Employee implements Comparable{
+public class Employee{//implements Comparable{
     private String name;
     private int age;
     private MyDate birthday;
-
-    public Employee() {
-    }
 
     public String getName() {
         return name;
@@ -47,15 +44,15 @@ public class Employee implements Comparable{
         this.birthday = birthday;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        if(o instanceof Employee){
-            Employee employee = (Employee) o;
-            return this.name.compareTo(employee.name);
-        }else{
-            throw new RuntimeException("您输入的类型不匹配");
-        }
-    }
+//    @Override
+//    public int compareTo(Object o) {
+//        if(o instanceof Employee){
+//            Employee employee = (Employee) o;
+//            return this.name.compareTo(employee.name);
+//        }else{
+//            throw new RuntimeException("您输入的类型不匹配");
+//        }
+//    }
 
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-package Set集合.Treeset的课后练习;
+package Set集合.Treeset的课后练习_$使用泛型了$_;
 /**
  * 今天也要元气满满啊！
  * 今天也要加油啊！
@@ -21,9 +21,6 @@ public class MyDate {
                 ", month=" + month +
                 ", day=" + day +
                 '}';
-    }
-
-    public MyDate() {
     }
 
     public MyDate(int year, int month, int day) {

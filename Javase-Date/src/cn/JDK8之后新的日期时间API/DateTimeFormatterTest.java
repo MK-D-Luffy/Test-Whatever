@@ -1,4 +1,4 @@
-/**
+package cn.JDK8之后新的日期时间API; /**
  * 今天也要元气满满啊！
  * 今天也要加油啊！
  * 道路,很远!脚步,更长!
@@ -6,14 +6,12 @@
 
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.temporal.TemporalAccessor;
-import java.util.Date;
 
 /**
  * DateTimeFormatter:格式化或解析日期、时间
